@@ -17,8 +17,7 @@ io.sockets.emit('User Disconnected');
 
 socket.on('newuser', function (name) {
 console.log(name,' Is Now Connected!');
-io.sockets.emit('txnpm start
-                t',name + ' is now online');
+io.sockets.emit('txt',name + ' is now online');
 });
 
 socket.on('exit', function (name) {
