@@ -1,7 +1,7 @@
 var io = require('/usr/local/lib/node_modules/socket.io').listen(65080);
 
 io.sockets.on('connection', function (socket) {
-  console.log(‘Server listening on port: 65080’);
+  console.log('Server listening on port: 65080');
   var address = socket.handshake.address;
   console.log('New connection from ' + address.address + ':' + address.port);
 
