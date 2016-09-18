@@ -1,4 +1,4 @@
-var io = require('socket.io').listen(65080);
+var io = require('/usr/local/lib/node_modules/socket.io').listen(65080);
 
 io.sockets.on('connection', function (socket) {
   var address = socket.handshake.address;
