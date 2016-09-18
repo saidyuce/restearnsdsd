@@ -1,0 +1,8 @@
+version: 0.0
+os: linux
+files:
+  - source: /html/index.html
+    destination: /var/www/html/
+overwrite: yes
+
+
