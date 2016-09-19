@@ -15,7 +15,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/saidyuce/restearn"
+    "url": "git://github.com/saidyuce/restearnfinal"
   },
   "dependencies": {
     "engine.io": "1.6.11",
