@@ -1,4 +1,4 @@
-var io = require('socket.io').listen(65080);
+var io = require('/node_modules/socket.io').listen(65080);
 
 io.sockets.on('connection', function (socket) {
   console.log('Server listening on port: 65080');
