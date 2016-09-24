@@ -2,7 +2,7 @@ var io = require('socket.io').listen(65080);
 
 console.log('Deneme log');
 
-io.sockets.on('connection', function (socket) {
+io.on('connection', function (socket) {
   console.log('Server listening on port: 65080');
   var address = socket.handshake.address;
   console.log('New connection from ' + address.address + ':' + address.port);
