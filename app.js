@@ -43,6 +43,7 @@ if(tip=="onur1234"){
 			
 		}else {
 			client_sockets.splice(i,1);
+			console.log('önceki silindi yeni eklencek '+my_cl_obj.data.user_id);
 			durum="yok";
 		}
 		
