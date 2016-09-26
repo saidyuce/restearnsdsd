@@ -24,7 +24,8 @@ socket.on('private message', function (msg) {
 	
 	var json_message = JSON.parse(msg);
     var tip=json_message.type;
-
+	console.log(tip);
+	
 if(tip=="onur1234"){
 	
 	var my_cl_obj=new Object();
@@ -33,11 +34,21 @@ if(tip=="onur1234"){
 	var durum="yok";
 	for(var i=0;i<client_sockets.length;++i){
 		
-		if(client_sockets[i].data.siparis_key==my_cl_obj.data.siparis_key&&client_sockets[i].data.user_id==my_cl_obj.data.user_id)
+		
+		if(client_sockets[i].data.user_id==my_cl_obj.data.user_id){
+			
+			if(client_sockets[i].data.siparis_key==my_cl_obj.data.siparis_key&&client_sockets[i].data.user_id==my_cl_obj.data.user_id)
 		{
 			durum="var";
 			
+		}else {
+			client_sockets.splice(i,1);
+			durum="yok";
 		}
+		
+		}
+		
+		
 	}
 	if(durum=="var"){
 		console.log('var '+my_cl_obj.data.user_id);
