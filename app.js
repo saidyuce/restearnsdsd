@@ -30,16 +30,29 @@ if(tip=="onur1234"){
 	var my_cl_obj=new Object();
 	my_cl_obj.data=json_message;
 	my_cl_obj.con=socket;
-	client_sockets.push(my_cl_obj);
+	var durum="yok";
+	for(var i=0;i<client_sockets.length;++i){
+		
+		if(client_sockets[i].data.siparis_key==my_cl_obj.data.siparis_key&&client_sockets[i].data.user_id==my_cl_obj.data.user_id)
+		{
+			durum="var";
+			
+		}
+	}
+	if(durum=="var"){
+		console.log('var '+my_cl_obj.data.user_id);
+	}
+	else {
+			console.log('yok '+my_cl_obj.data.user_id);
+			client_sockets.push(my_cl_obj);
+	}
+
 }
 
 else if(tip=="said1234"){
 
 	  
-	 var my_cl_obj2=new Object();
-	my_cl_obj2.data=json_message;
-	my_cl_obj2.con=socket;
-	cafe_sockets.push(my_cl_obj2);
+
 	  
 	
 }
