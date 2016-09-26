@@ -25,8 +25,19 @@ socket.on('private message', function (msg) {
 	var json_message = JSON.parse(msg);
     var tip=json_message.type;
 	console.log(tip);
+ if(tip=="onur1234siparis"){
+       
+     var my_cl_obj=new Object();
+	my_cl_obj.data=json_message;
+	my_cl_obj.con=socket;
+ cafe_sockets[i].con.emit(cafe_sockets[i].data.temp_key, 'siparis_'+my_cl_obj.data.user_id);
+ 
+ 
+ 
+ }
+
 	
-if(tip=="onur1234"){
+else if(tip=="onur1234"){
 	
 	var my_cl_obj=new Object();
 	my_cl_obj.data=json_message;
@@ -36,7 +47,17 @@ if(tip=="onur1234"){
 		
 		
 		if(client_sockets[i].data.user_id==my_cl_obj.data.user_id){
-			
+		
+if(client_sockets[i].data.cafe_id!=my_cl_obj.data.cafe_id){
+	
+	cafe_sockets[i].con.emit(cafe_sockets[i].data.temp_key, 'cafe_degisti_'+my_cl_obj.data.user_id);
+	
+}
+		
+
+
+
+		
 			if(client_sockets[i].data.siparis_key==my_cl_obj.data.siparis_key&&client_sockets[i].data.user_id==my_cl_obj.data.user_id)
 		{
 			durum="var";
@@ -46,6 +67,10 @@ if(tip=="onur1234"){
 			console.log('önceki silindi yeni eklencek '+my_cl_obj.data.user_id);
 			durum="yok";
 		}
+		
+		
+		
+		
 		
 		}
 		
@@ -61,7 +86,7 @@ if(tip=="onur1234"){
 				for(var i=0;i<cafe_sockets.length;++i){
 					if(cafe_sockets[i].data.cafe_id==my_cl_obj.data.cafe_id){
 						
-						cafe_sockets[i].con.emit(cafe_sockets[i].data.temp_key, 'oturum acıldı '+my_cl_obj.data.user_id);
+						cafe_sockets[i].con.emit(cafe_sockets[i].data.temp_key, 'oturum_acıldı_'+my_cl_obj.data.user_id);
 					
 					
 					
