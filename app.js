@@ -61,7 +61,10 @@ if(tip=="onur1234"){
 				for(var i=0;i<cafe_sockets.length;++i){
 					if(cafe_sockets[i].data.cafe_id==my_cl_obj.data.cafe_id){
 						
-						socket.broadcast.to(cafe_sockets[i].data.temp_key).emit('message', 'oturum acıldı '+my_cl_obj.data.user_id);
+						cafe_sockets[i].con.emit(cafe_sockets[i].data.temp_key, 'oturum acıldı '+my_cl_obj.data.user_id);
+					
+					
+					
 					}
 					
 				}
