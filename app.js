@@ -25,12 +25,21 @@ socket.on('private message', function (msg) {
 	var json_message = JSON.parse(msg);
     var tip=json_message.type;
 	console.log(tip);
- if(tip=="onur1234siparis"){
-       
-     var my_cl_obj=new Object();
-	my_cl_obj.data=json_message;
-	my_cl_obj.con=socket;
- cafe_sockets[i].con.emit(cafe_sockets[i].data.temp_key, 'siparis_'+my_cl_obj.data.user_id);
+
+	if(tip=="onur1234siparis"){
+          var my_cl_obj=new Object();
+        	my_cl_obj.data=json_message;
+	       
+
+	for(var i=0;i<cafe_sockets.length;++i){
+			if(cafe_sockets[i].data.cafe_id==my_cl_obj.data.cafe_id){
+				
+				 cafe_sockets[i].con.emit(cafe_sockets[i].data.temp_key, 'siparis_'+my_cl_obj.data.user_id);
+			}
+		 
+
+	}	  
+
  
  
  
