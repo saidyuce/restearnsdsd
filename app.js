@@ -2,6 +2,17 @@ var io = require('socket.io').listen(65080);
 
 console.log('Deneme log');
 
+
+
+var cafe_sockets=new Array();
+var client_sockets=new Array();
+
+
+
+
+
+
+
 io.on('connection', function (socket) {
   console.log('Server listening on port: 65080');
   var address = socket.handshake.address;
@@ -10,6 +21,30 @@ io.on('connection', function (socket) {
 io.sockets.emit('this', { will: 'be received by everyone'});
 
 socket.on('private message', function (msg) {
+	
+	var json_message = JSON.parse(msg);
+    var tip=json_message.type;
+
+if(tip=="onur1234"){
+	
+	var my_cl_obj=new Object();
+	my_cl_obj.data=json_message;
+	my_cl_obj.con=socket;
+	client_sockets.push(my_cl_obj);
+}
+
+else if(tip=="said1234"){
+
+	  
+	 var my_cl_obj2=new Object();
+	my_cl_obj2.data=json_message;
+	my_cl_obj2.con=socket;
+	cafe_sockets.push(my_cl_obj2);
+	  
+	
+}
+
+	
 console.log('New Chat Message ', msg);
 io.sockets.emit('txt',msg);
 });
