@@ -107,13 +107,33 @@ var cafe_durum=my_cl_obj.data.cafe_durum;
 
 
 		
-
+	if(client_sockets[i].data.siparis_key==my_cl_obj.data.siparis_key&&client_sockets[i].data.user_id==my_cl_obj.data.user_id)
+		{
+			durum="var";
+			
+		}else {
+			client_sockets.splice(i,1);
+			console.log('önceki silindi yeni eklencek '+my_cl_obj.data.user_id);
+			durum="yok";
+		}
 
 		
 		///////////tüm soketleri tara///////////
 	}
 
-	
+		if(durum=="var"){
+		console.log('var '+my_cl_obj.data.user_id);
+	}
+	else {
+			console.log('yok '+my_cl_obj.data.user_id);
+			
+			client_sockets.push(my_cl_obj);
+				for(var i=0;i<cafe_sockets.length;++i){
+					///şu anki cafe soketi bul//
+					
+				}
+				
+	}
 	
 	
 	
