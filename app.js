@@ -83,7 +83,7 @@ socket.on('kullanici_oturum', function (msg) {
 	var json_message = JSON.parse(msg);
     var tip=json_message.type;
 	console.log(tip);
-	
+	var durum="yok";
 	
 	////kullanici oturum açma///
 
@@ -101,7 +101,24 @@ var cafe_durum=my_cl_obj.data.cafe_durum;
 		///////////tüm soketleri tara///////////
 	if(client_sockets[i].data.cafe_id!=my_cl_obj.data.cafe_id&&client_sockets[i].data.user_id==my_cl_obj.data.user_id){
 	/// eski cafeye bilgi yolla///
-	cafe_sockets[i].con.emit(cafe_sockets[i].data.cafe_id+"_cafe_degisti", ''+my_cl_obj.data.user_id);
+	var send_data=new Object();
+send_data.kul_id=my_cl_obj.data.user_id;
+send_data.cafe_id=my_cl_obj.data.cafe_id;
+	  $.ajax({
+    type: 'POST',
+    url: 'http://restearnserver.tk/RestUpp/get_degisen_cafe.php',
+	
+    data: { 
+        'message': JSON.stringify(send_data), 
+		       
+            
+    },
+    success: function(msg){
+     cafe_sockets[i].con.emit(cafe_sockets[i].data.cafe_id+"_cafe_degisti", msg);
+	
+    }
+});
+	
 	
 }
 
@@ -125,6 +142,8 @@ var cafe_durum=my_cl_obj.data.cafe_durum;
 		console.log('var '+my_cl_obj.data.user_id);
 	}
 	else {
+		
+		///////////////oturum aç///////////
 			console.log('yok '+my_cl_obj.data.user_id);
 			
 			client_sockets.push(my_cl_obj);
@@ -138,7 +157,7 @@ var cafe_durum=my_cl_obj.data.cafe_durum;
 	
 	
 	
-		///////////////oturum aç///////////
+		
 	
 	
 }
