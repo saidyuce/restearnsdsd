@@ -95,9 +95,8 @@ io.on('connection', function(socket) {
                             cafe_id: send_data.cafe_id
                         }
                     }, function(error, response, body) {
-			    if (error) return console.log("The error is:",err);
-			    console.log('body:'+body);
-			    console.log('caf:'+cafe_sockets[i].data.cafe_id);
+		        console.log('body:'+body);
+			console.log('caf:'+cafe_sockets[i].data.cafe_id);
                         cafe_sockets[i].con.emit(cafe_sockets[i].data.cafe_id + "_cafe_degisti", body);
                     });
 
