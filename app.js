@@ -93,7 +93,6 @@ io.on('connection', function(socket) {
                         form: {
                             kul_id: send_data.kul_id,
                             cafe_id: send_data.cafe_id
-			    'Content-Type': 'application/x-www-form-urlencoded'
                         }
                     }, function(error, response, body) {
 		        console.log('body:'+body);
