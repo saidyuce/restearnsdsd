@@ -88,17 +88,68 @@ socket.on('kullanici_oturum', function (msg) {
 	////kullanici oturum açma///
 
 	if(tip=="onur1234"){
-	
+	///////////////oturum aç///////////
 	var my_cl_obj=new Object();
 	my_cl_obj.data=json_message;
 	my_cl_obj.con=socket;
-var cafe_durum=my_cl_obj.cafe_durum;	
+var cafe_durum=my_cl_obj.data.cafe_durum;	
 	
 		
 	console.log(cafe_durum,' Is Now Connected!');
-
-
+	for(var i=0;i<client_sockets.length;++i){
+		
+		///////////tüm soketleri tara///////////
+	if(client_sockets[i].data.cafe_id!=my_cl_obj.data.cafe_id&&client_sockets[i].data.user_id==my_cl_obj.data.user_id){
+	/// eski cafeye bilgi yolla///
+	cafe_sockets[i].con.emit(cafe_sockets[i].data.cafe_id+"_cafe_degisti", ''+my_cl_obj.data.user_id);
+	
 }
+
+
+			if(client_sockets[i].data.siparis_key==my_cl_obj.data.siparis_key&&client_sockets[i].data.user_id==my_cl_obj.data.user_id)
+		{
+			durum="var";
+			
+		}else {
+			client_sockets.splice(i,1);
+	//soketi diziye ekle/////
+			durum="yok";
+			
+			    client_sockets.push(my_cl_obj);
+				
+				
+				
+			
+			
+			
+			
+			
+			
+			
+		}
+
+
+
+		
+		///////////tüm soketleri tara///////////
+	}
+
+	
+	
+	
+	
+	
+		///////////////oturum aç///////////
+	
+	
+}
+
+
+
+
+
+
+
 	
 console.log('New Chat Message ', msg);
 io.sockets.emit('txt',msg);
