@@ -102,8 +102,8 @@ var cafe_durum=my_cl_obj.data.cafe_durum;
 	if(client_sockets[i].data.cafe_id!=my_cl_obj.data.cafe_id&&client_sockets[i].data.user_id==my_cl_obj.data.user_id){
 	/// eski cafeye bilgi yolla///
 	var send_data=new Object();
-send_data.kul_id=my_cl_obj.data.user_id;
-send_data.cafe_id=my_cl_obj.data.cafe_id;
+send_data.kul_id=client_sockets[i].data.user_id;
+send_data.cafe_id=client_sockets[i].data.cafe_id;
 	  $.ajax({
     type: 'POST',
     url: 'http://restearnserver.tk/RestUpp/get_degisen_cafe.php',
