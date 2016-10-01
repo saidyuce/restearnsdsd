@@ -28,29 +28,33 @@ io.on('connection', function(socket) {
             my_cl_obj2.data = json_message;
             my_cl_obj2.con = socket;
             var durum = "yok";
-            for (var i = 0; i < cafe_sockets.length; ++i) {
-
-                if (cafe_sockets[i].data.cafe_id == my_cl_obj2.data.cafe_id) {
-
-                    if (cafe_sockets[i].data.temp_key == my_cl_obj2.data.temp_key && cafe_sockets[i].data.cafe_id == my_cl_obj2.data.cafe_id) {
-                        durum = "var";
-
-                    } else {
-                        cafe_sockets.splice(i, 1);
-                        console.log('önceki silindi yeni eklencek ' + my_cl_obj2.data.cafe_id);
-                        durum = "yok";
-                    }
-
-                }
-
-            }
-            if (durum == "var") {
-                console.log('var ' + my_cl_obj2.data.cafe_id);
-            } else {
-                console.log('yok ' + my_cl_obj2.data.cafe_id);
-
-                cafe_sockets.push(my_cl_obj2);
-            }
+           for(var i=0;i<cafe_sockets.length;++i){
+		
+		
+		if(cafe_sockets[i].data.cafe_id==my_cl_obj2.data.cafe_id){
+			
+			if(cafe_sockets[i].data.temp_key==my_cl_obj2.data.temp_key&&cafe_sockets[i].data.cafe_id==my_cl_obj2.data.cafe_id)
+		{
+			durum="var";
+			
+		}else {
+			cafe_sockets.splice(i,1);
+			console.log('önceki silindi yeni eklencek '+my_cl_obj2.data.cafe_id);
+			durum="yok";
+		}
+		
+		}
+		
+		
+	}
+	if(durum=="var"){
+		console.log('var '+my_cl_obj2.data.cafe_id);
+	}
+	else {
+			console.log('yok '+my_cl_obj2.data.cafe_id);
+			
+			cafe_sockets.push(my_cl_obj2);
+	}
 		
         }
 	    
@@ -91,6 +95,8 @@ io.on('connection', function(socket) {
                             cafe_id: send_data.cafe_id
                         }
                     }, function(error, response, body) {
+			    console.log('body:'+body);
+			    console.log('caf:'+cafe_sockets[i].data.cafe_id);
                         cafe_sockets[i].con.emit(cafe_sockets[i].data.cafe_id + "_cafe_degisti", body);
                     });
 
