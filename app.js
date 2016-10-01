@@ -106,28 +106,7 @@ var cafe_durum=my_cl_obj.data.cafe_durum;
 }
 
 
-			if(client_sockets[i].data.siparis_key==my_cl_obj.data.siparis_key&&client_sockets[i].data.user_id==my_cl_obj.data.user_id)
-		{
-			durum="var";
-			
-		}else {
-			client_sockets.splice(i,1);
-	//soketi diziye ekle/////
-			durum="yok";
-			
-			    client_sockets.push(my_cl_obj);
-				
-				
-				
-			
-			
-			
-			
-			
-			
-			
-		}
-
+		
 
 
 		
