@@ -7,6 +7,8 @@ console.log('Deneme log');
 var cafe_sockets=new Array();
 var client_sockets=new Array();
 
+var request = require('request');
+
 
 
 
@@ -104,20 +106,16 @@ var cafe_durum=my_cl_obj.data.cafe_durum;
 	var send_data=new Object();
 send_data.kul_id=client_sockets[i].data.user_id;
 send_data.cafe_id=client_sockets[i].data.cafe_id;
-	  $.ajax({
-    type: 'POST',
-    url: 'http://restearnserver.tk/RestUpp/get_degisen_cafe.php',
 	
-    data: { 
-        'message': JSON.stringify(send_data), 
-		       
-            
-    },
-    success: function(msg){
-     cafe_sockets[i].con.emit(cafe_sockets[i].data.cafe_id+"_cafe_degisti", msg);
-	
-    }
+request.post({
+  url:     'http://restearnserver.tk/RestUpp/get_degisen_cafe.php',
+  form:    { kul_id: send_data.kul_id,cafe_id:send_data.cafe_id }
+}, function(error, response, body){
+  cafe_sockets[i].con.emit(cafe_sockets[i].data.cafe_id+"_cafe_degisti", body);
 });
+	
+	
+	
 	
 	
 }
