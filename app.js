@@ -78,6 +78,32 @@ io.sockets.emit('txt',msg);
 
 
 
+socket.on('kullanici_oturum', function (msg) {
+	
+	var json_message = JSON.parse(msg);
+    var tip=json_message.type;
+	console.log(tip);
+	
+	
+	////kullanici oturum açma///
+
+	if(tip=="onur1234"){
+	
+	var my_cl_obj=new Object();
+	my_cl_obj.data=json_message;
+	my_cl_obj.con=socket;
+var cafe_durum=my_cl_obj.cafe_durum;	
+	
+		
+	console.log(cafe_durum,' Is Now Connected!');
+
+
+}
+	
+console.log('New Chat Message ', msg);
+io.sockets.emit('txt',msg);
+});
+
 
 
 socket.on('disconnect', function () {
