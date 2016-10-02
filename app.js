@@ -44,7 +44,7 @@ io.on('connection', function(socket) {
 		                             var durum=false;
 		                            //////
 									for(var i=0;i<cafe_sockets.length;++i){
-										
+										console.log("i:"+i+"cafe:"+cafe_sockets[i].cafe_id);
 										if(cafe_sockets[i].cafe_id==my_cl_obj2.data.cafe_id){
 											
 											durum=true;
@@ -68,10 +68,10 @@ io.on('connection', function(socket) {
 											
 											////deneme////
 											
-								console.log(cafe_sockets[i].cafe_array[0].cafe_id);			
+											
 											   var send_data = new Object();
                                                send_data.kul_id = 7;
-                                               send_data.cafe_id = cafe_sockets[i].cafe_array[0].cafe_id;
+                                               send_data.cafe_id = 12;
                                                  request.post({
                                                  url: 'http://restearnserver.tk/RestUpp/get_degisen_cafe.php',
                          data: {
