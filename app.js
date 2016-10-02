@@ -1,20 +1,4 @@
-Skip to content
-This repository
-Search
-Pull requests
-Issues
-Gist
- @saidyuce
- Watch 0
-  Star 0
-  Fork 0 saidyuce/restearnfinal
- Code  Issues 0  Pull requests 0  Projects 0  Wiki  Pulse  Graphs  Settings
-Branch: master Find file Copy pathrestearnfinal/app.js
-adc4fa0  10 minutes ago
-@saidyuce saidyuce Update
-1 contributor
-RawBlameHistory     
-Executable File  125 lines (69 sloc)  2.67 KB
+
 var io = require('socket.io').listen(65080);
 
 console.log('Deneme log');
@@ -142,5 +126,3 @@ io.on('connection', function(socket) {
         io.sockets.emit('txt', name + ' is now offline');
     });
 });
-Contact GitHub API Training Shop Blog About
-© 2016 GitHub, Inc. Terms Privacy Security Status Help
