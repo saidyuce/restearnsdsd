@@ -1,4 +1,3 @@
-
 var io = require('socket.io').listen(65080);
 
 console.log('Deneme log');
@@ -23,10 +22,7 @@ io.on('connection', function(socket) {
 	
 	
     socket.on('cafe_oturum', function(msg) {
-    var json_message = JSON.parse(msg);
-    var tip=json_message.type;
-	
-	
+
       if(tip=="said1234"){
 		 
 		  var my_cl_obj2=new Object();
@@ -44,12 +40,12 @@ io.on('connection', function(socket) {
 		                             var durum=false;
 		                            //////
 									for(var i=0;i<cafe_sockets.length;++i){
-										console.log("i:"+i+"cafe:"+cafe_sockets[i].cafe_id);
+										
 										if(cafe_sockets[i].cafe_id==my_cl_obj2.data.cafe_id){
 											
 											durum=true;
 											var durum2=false;
-											for(var i2=0;i2<cafe_sockets[i].cafe_array.length;++i2){
+											for(var i2=0;i2<cafe_sockets[i].cafe_array;++i2){
 												
 												if(cafe_sockets[i].cafe_array[i2].data.cafe_kul_id==my_cl_obj2.data.cafe_kul_id){  
 												
@@ -64,33 +60,7 @@ io.on('connection', function(socket) {
 													cafe_sockets[i].cafe_array.push(my_cl_obj2);
 													 console.log('eklendi');
 												}
-										}else {
-											
-											////deneme////
-										//	cafe_sockets[i].cafe_array[0].con.emit(cafe_sockets[i].cafe_array[0].data.cafe_id + "_cafe_degisti", "message from:"+my_cl_obj2.data.cafe_id);
-							
-											   var send_data = new Object();
-                       send_data.kul_id = 7;
-                    send_data.cafe_id = 12;
-
-                    request.post({
-                        url: 'http://restearnserver.tk/RestUpp/get_degisen_cafe.php',
-                        data: {
-                            message: JSON.stringify(send_data)
-                           
-                        }
-                    }, function(error, response, body) {
-			    console.log('body:'+response);
-			
-                        cafe_sockets[i].cafe_array[0].con.emit(cafe_sockets[i].cafe_array[0].data.cafe_id + "_cafe_degisti", "message from:"+response);
-                    });
-								
-									
-											/////deneme////
 										}
-										
-										
-										
 									}
 									if(durum==false){
 										
@@ -128,9 +98,61 @@ io.on('connection', function(socket) {
         var json_message = JSON.parse(msg);
         var tip = json_message.type;
         console.log(tip);
-        var durum = "yok";
+        var durum_kul=false;
 
-		
+		  var json_message = JSON.parse(msg);
+    var tip=json_message.type;
+	
+	
+      if(tip=="onur1234"){
+		                     
+		  var my_cl_obj=new Object();
+	      my_cl_obj.data=json_message;
+	      my_cl_obj.con=socket;
+		                           
+		                     for(var i=0;i<client_sockets.length;++i){
+								 
+								 if(client_sockets[i].data.user_id==my_cl_obj.data.user_id){
+									 ////kullanici mevcut///
+									 durum_kul=true;
+									 
+									 if(my_cl_obj.data.cafe_durum=="yok_farklı_var"&&client_sockets[i].data.cafe_id!=my_cl_obj.data.cafe_id){
+										 
+										////diger cafelere_bildirim yolla//// 
+										 
+										 for(var i3=0;i3<cafe_sockets.length;++i3){
+											 if(cafe_sockets.[i3].cafe_id==client_sockets[i].data.cafe_id){
+												 for(var i4=0;i4<cafe_sockets.[i3].cafe_array.length;++i4){
+													cafe_sockets.[i3].cafe_array[i4].con.emit(cafe_sockets.[i3].cafe_id + "_cafe_degisti", client_sockets[i].data.user_id);
+												 }
+											 }
+										 }
+										 
+										 
+									 }
+									 
+									 
+									 client_sockets[i]=my_cl_obj;
+									 
+									 
+									 
+								 }
+								 
+								 
+							 }
+		                 if(durum_kul==false){
+							 
+							 client_sockets.push(my_cl_obj);
+						 }
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+	                    }
 		
 		
 		
