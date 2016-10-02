@@ -22,7 +22,10 @@ io.on('connection', function(socket) {
 	
 	
     socket.on('cafe_oturum', function(msg) {
-
+        var json_message = JSON.parse(msg);
+        var tip = json_message.type;
+        console.log(tip);
+   
       if(tip=="said1234"){
 		 
 		  var my_cl_obj2=new Object();
