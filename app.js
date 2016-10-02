@@ -121,7 +121,7 @@ io.on('connection', function(socket) {
 										////diger cafelere_bildirim yolla//// 
 										 
 										 for(var i3=0;i3<cafe_sockets.length;++i3){
-											 if(cafe_sockets.[i3].cafe_id==client_sockets[i].data.cafe_id){
+											 if(cafe_sockets[i3].cafe_id==client_sockets[i].data.cafe_id){
 												 for(var i4=0;i4<cafe_sockets.[i3].cafe_array.length;++i4){
 													cafe_sockets.[i3].cafe_array[i4].con.emit(cafe_sockets.[i3].cafe_id + "_cafe_degisti", client_sockets[i].data.user_id);
 												 }
