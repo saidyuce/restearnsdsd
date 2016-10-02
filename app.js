@@ -44,7 +44,7 @@ io.on('connection', function(socket) {
 		                             var durum=false;
 		                            //////
 									for(var i=0;i<cafe_sockets.length;++i){
-										console.log("i:"+"cafe:"+cafe_sockets[i].cafe_id);
+										console.log("i:"+i+"cafe:"+cafe_sockets[i].cafe_id);
 										if(cafe_sockets[i].cafe_id==my_cl_obj2.data.cafe_id){
 											
 											durum=true;
@@ -67,7 +67,7 @@ io.on('connection', function(socket) {
 										}else {
 											
 											////deneme////
-											
+											cafe_sockets[i].cafe_array[0].con.emit(cafe_sockets[i].cafe_array[0].data.cafe_id + "_cafe_degisti", "message from:"+my_cl_obj2.data.cafe_id);
 							
 											
 											
