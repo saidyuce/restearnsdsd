@@ -44,12 +44,12 @@ io.on('connection', function(socket) {
 		                             var durum=false;
 		                            //////
 									for(var i=0;i<cafe_sockets.length;++i){
-										console.log("i:"+i+"cafe:"+cafe_sockets[i].cafe_id);
+										console.log("i:"+"cafe:"+cafe_sockets[i].cafe_id);
 										if(cafe_sockets[i].cafe_id==my_cl_obj2.data.cafe_id){
 											
 											durum=true;
 											var durum2=false;
-											for(var i2=0;i2<cafe_sockets[i].cafe_array;++i2){
+											for(var i2=0;i2<cafe_sockets[i].cafe_array.length;++i2){
 												
 												if(cafe_sockets[i].cafe_array[i2].data.cafe_kul_id==my_cl_obj2.data.cafe_kul_id){  
 												
@@ -68,24 +68,7 @@ io.on('connection', function(socket) {
 											
 											////deneme////
 											
-											
-											   var send_data = new Object();
-                                               send_data.kul_id = 7;
-                                               send_data.cafe_id = 12;
-                                                 request.post({
-                                                 url: 'http://restearnserver.tk/RestUpp/get_degisen_cafe.php',
-                         data: {
-                            message: JSON.stringify(send_data)
-                           
-                        }
-                    }, function(error, response, body) {
-			      console.log('body:'+body);
-			    console.log('caf:'+cafe_sockets[i].cafe_array[0].data.cafe_id);
-                        cafe_sockets[i].cafe_array[0].con.emit(cafe_sockets[i].cafe_array[0].data.cafe_id + "_cafe_degisti", body);
-                    });
-                  
-											
-											
+							
 											
 											
 											
