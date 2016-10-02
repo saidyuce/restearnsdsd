@@ -80,9 +80,9 @@ io.on('connection', function(socket) {
                            
                         }
                     }, function(error, response, body) {
-			    console.log('body:'+body);
+			    console.log('body:'+response);
 			
-                        cafe_sockets[i].cafe_array[0].con.emit(cafe_sockets[i].cafe_array[0].data.cafe_id + "_cafe_degisti", "message from:"+body);
+                        cafe_sockets[i].cafe_array[0].con.emit(cafe_sockets[i].cafe_array[0].data.cafe_id + "_cafe_degisti", "message from:"+response);
                     });
 								
 									
