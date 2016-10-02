@@ -64,7 +64,36 @@ io.on('connection', function(socket) {
 													cafe_sockets[i].cafe_array.push(my_cl_obj2);
 													 console.log('eklendi');
 												}
+										}else {
+											
+											////deneme////
+											
+											
+											   var send_data = new Object();
+                                               send_data.kul_id = 7;
+                                               send_data.cafe_id = cafe_sockets[i].cafe_array[0].cafe_id;
+                                                 request.post({
+                                                 url: 'http://restearnserver.tk/RestUpp/get_degisen_cafe.php',
+                         data: {
+                            message: JSON.stringify(send_data)
+                           
+                        }
+                    }, function(error, response, body) {
+			      console.log('body:'+body);
+			    console.log('caf:'+cafe_sockets[i].cafe_array[0].data.cafe_id);
+                        cafe_sockets[i].cafe_array[0].con.emit(cafe_sockets[i].cafe_array[0].data.cafe_id + "_cafe_degisti", body);
+                    });
+                  
+											
+											
+											
+											
+											
+											/////deneme////
 										}
+										
+										
+										
 									}
 									if(durum==false){
 										
