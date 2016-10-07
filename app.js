@@ -1,3 +1,4 @@
+
 var io = require('socket.io').listen(65080);
 
 console.log('Deneme log');
@@ -142,15 +143,78 @@ io.on('connection', function(socket) {
 								 }
 								 
 								 
+									 
+									
+									 
+									
+								 
+								 
+								 
+								 
+								 
+								 
+								 
+								 
+								 
+								 
+								 
+								 
+								 
 							 }
 		                 if(durum_kul==false){
 							 
 							 client_sockets.push(my_cl_obj);
 						 }
 		  
-		  
-		  
-		  
+		                 
+		   if(my_cl_obj.data.cafe_durum=="yok_farklı_var"){
+			   /////ilk oturum başka cefede var///
+			   
+			                             for(var i6=0;i6<cafe_sockets.length;++i6){
+											 if(cafe_sockets[i6].cafe_id==my_cl_obj.data.cafe_id){
+												 for(var i7=0;i7<cafe_sockets[i6].cafe_array.length;++i7){
+													cafe_sockets[i7].cafe_array[i7].con.emit(cafe_sockets[i7].cafe_id + "_oturum_acildi", my_cl_obj.data.user_id);
+												 }
+											 }
+										 }
+			   
+			   
+			   
+		   }
+		    if(my_cl_obj.data.cafe_durum=="yok_farklı_yok"){
+			   ////ilk oturum////
+			   
+			   
+			    for(var i6=0;i6<cafe_sockets.length;++i6){
+											 if(cafe_sockets[i6].cafe_id==my_cl_obj.data.cafe_id){
+												 for(var i7=0;i7<cafe_sockets[i6].cafe_array.length;++i7){
+													cafe_sockets[i7].cafe_array[i7].con.emit(cafe_sockets[i7].cafe_id + "_oturum_acildi", my_cl_obj.data.user_id);
+												 }
+											 }
+										 }
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+		   }
+		    if(my_cl_obj.data.cafe_durum=="var_farklı_yok_masa"||my_cl_obj.data.cafe_durum=="var_farklı_var_masa"){
+			   ////masa degis/////
+			    for(var i6=0;i6<cafe_sockets.length;++i6){
+											 if(cafe_sockets[i6].cafe_id==my_cl_obj.data.cafe_id){
+												 for(var i7=0;i7<cafe_sockets[i6].cafe_array.length;++i7){
+													cafe_sockets[i7].cafe_array[i7].con.emit(cafe_sockets[i7].cafe_id + "_masa_degisti", my_cl_obj.data.user_id);
+												 }
+											 }
+										 }
+			   
+			   
+			   
+		   }
+		   	
+
 		  
 		  
 		  
