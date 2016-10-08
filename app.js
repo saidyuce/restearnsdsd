@@ -173,7 +173,7 @@ io.on('connection', function(socket) {
 			                             for(var i6=0;i6<cafe_sockets.length;++i6){
 											 if(cafe_sockets[i6].cafe_id==my_cl_obj.data.cafe_id){
 												 for(var i7=0;i7<cafe_sockets[i6].cafe_array.length;++i7){
-													cafe_sockets[i7].cafe_array[i7].con.emit(cafe_sockets[i7].cafe_id + "_oturum_acildi", my_cl_obj.data.user_id);
+													cafe_sockets[i6].cafe_array[i7].con.emit(cafe_sockets[i6].cafe_id + "_oturum_acildi", my_cl_obj.data.user_id);
 												 }
 											 }
 										 }
@@ -188,7 +188,7 @@ io.on('connection', function(socket) {
 			    for(var i6=0;i6<cafe_sockets.length;++i6){
 											 if(cafe_sockets[i6].cafe_id==my_cl_obj.data.cafe_id){
 												 for(var i7=0;i7<cafe_sockets[i6].cafe_array.length;++i7){
-													cafe_sockets[i7].cafe_array[i7].con.emit(cafe_sockets[i7].cafe_id + "_oturum_acildi", my_cl_obj.data.user_id);
+													cafe_sockets[i6].cafe_array[i7].con.emit(cafe_sockets[i6].cafe_id + "_oturum_acildi", my_cl_obj.data.user_id);
 												 }
 											 }
 										 }
@@ -205,7 +205,7 @@ io.on('connection', function(socket) {
 			    for(var i6=0;i6<cafe_sockets.length;++i6){
 											 if(cafe_sockets[i6].cafe_id==my_cl_obj.data.cafe_id){
 												 for(var i7=0;i7<cafe_sockets[i6].cafe_array.length;++i7){
-													cafe_sockets[i7].cafe_array[i7].con.emit(cafe_sockets[i7].cafe_id + "_masa_degisti", my_cl_obj.data.user_id);
+													cafe_sockets[i6].cafe_array[i7].con.emit(cafe_sockets[i6].cafe_id + "_masa_degisti", my_cl_obj.data.user_id);
 												 }
 											 }
 										 }
