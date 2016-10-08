@@ -220,6 +220,27 @@ io.on('connection', function(socket) {
 		  
 		  
 	                    }
+						
+						else if(tip=="onur1234siparis"){
+							
+	      var my_cl_obj=new Object();
+	      my_cl_obj.data=json_message;
+	      my_cl_obj.con=socket;
+							
+							 for(var i6=0;i6<cafe_sockets.length;++i6){
+											 if(cafe_sockets[i6].cafe_id==my_cl_obj.data.cafe_id){
+												 for(var i7=0;i7<cafe_sockets[i6].cafe_array.length;++i7){
+													cafe_sockets[i6].cafe_array[i7].con.emit(cafe_sockets[i6].cafe_id + "_siparis_verildi", my_cl_obj.data.user_id);
+												 }
+											 }
+										 }
+							
+							
+							
+							
+							
+							
+						}
 		
 		
 		
