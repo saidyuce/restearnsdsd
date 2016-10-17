@@ -162,6 +162,7 @@ io.on('connection', function(socket) {
 			console.log('User id:');
 			console.log(client_sockets[i6].data.user_id);
             client_sockets[i6].con.emit(client_sockets[i6].data.user_id + "_siparis_geri_bildirim",my_cl_obj.data);
+			console.log(client_sockets[i6].data.user_id+"");
                 }
             }
         }
