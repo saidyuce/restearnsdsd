@@ -54,6 +54,21 @@ io.on('connection', function(socket) {
                 cafe_sockets.push(cafe_soket_obj);
                 console.log('eklendi_hic_yoktu');
 	    }
+        }else if (tip == "said1234siparis") {
+
+            var my_cl_obj = new Object();
+            my_cl_obj.data = json_message;
+            my_cl_obj.con = socket;
+	console.log(client_sockets.length);
+            for (var i6 = 0; i6 < client_sockets.length; ++i6) {
+		    console.log('User id:');
+			console.log(client_sockets[i6].data.user_id);
+                if (client_sockets[i6].data.user_id == my_cl_obj.data.user_id) {
+			
+            client_sockets[i6].con.emit(client_sockets[i6].data.user_id + "_siparis_geri_bildirim",my_cl_obj.data );
+			console.log(client_sockets[i6].data.user_id+"");
+                }
+            }
         }
 
         console.log('New Chat Message ', msg);
@@ -151,22 +166,7 @@ io.on('connection', function(socket) {
                 }
             }
         }
-	    else if (tip == "said1234siparis") {
-
-            var my_cl_obj = new Object();
-            my_cl_obj.data = json_message;
-            my_cl_obj.con = socket;
-	console.log(client_sockets.length);
-            for (var i6 = 0; i6 < client_sockets.length; ++i6) {
-		    console.log('User id:');
-			console.log(client_sockets[i6].data.user_id);
-                if (client_sockets[i6].data.user_id == my_cl_obj.data.user_id) {
-			
-            client_sockets[i6].con.emit(client_sockets[i6].data.user_id + "_siparis_geri_bildirim",my_cl_obj.data );
-			console.log(client_sockets[i6].data.user_id+"");
-                }
-            }
-        }
+	    
         console.log('New Chat Message ', msg);
        //// io.sockets.emit('txt', msg);
     });
