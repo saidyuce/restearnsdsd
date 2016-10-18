@@ -167,7 +167,7 @@ io.on('connection', function(socket) {
             }
         }
         console.log('New Chat Message ', msg);
-        io.sockets.emit('txt', msg);
+       //// io.sockets.emit('txt', msg);
     });
 
     socket.on('disconnect', function() {
