@@ -158,9 +158,10 @@ io.on('connection', function(socket) {
             my_cl_obj.con = socket;
 
             for (var i6 = 0; i6 < client_sockets.length; ++i6) {
-                if (client_sockets[i6].data.user_id == my_cl_obj.data.user_id) {
-			console.log('User id:');
+		    console.log('User id:');
 			console.log(client_sockets[i6].data.user_id);
+                if (client_sockets[i6].data.user_id == my_cl_obj.data.user_id) {
+			
             client_sockets[i6].con.emit(client_sockets[i6].data.user_id + "_siparis_geri_bildirim",my_cl_obj.data );
 			console.log(client_sockets[i6].data.user_id+"");
                 }
