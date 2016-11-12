@@ -60,6 +60,7 @@ io.on('connection', function(socket) {
             my_cl_obj.data = json_message;
             my_cl_obj.con = socket;
 	console.log(client_sockets.length);
+		console.log('asdasd');
             for (var i6 = 0; i6 < client_sockets.length; ++i6) {
 		    console.log('User id:');
 			console.log(client_sockets[i6].data.user_id);
