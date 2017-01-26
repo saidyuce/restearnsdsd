@@ -119,7 +119,8 @@ io.on('connection', function(socket) {
 			//console.log(client_sockets[i6].data.user_id+"");
 			for (var i99 = 0; i99 < push_tokens.length; ++i99) {
 				if (push_tokens[i99].user_id == client_sockets[i6].data.user_id) {
-					sendMessageToUser(push_tokens[i99].push_token, 'Deneme123')
+					sendMessageToUser(push_tokens[i99].push_token + '', 'Deneme123')
+					console.log('send message to user döndü');
 				} else {
 					console.log('id eşleşmedi, mesaj yollanmadı');
 				}
