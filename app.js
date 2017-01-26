@@ -7,6 +7,34 @@ var client_sockets = new Array();
 
 var request = require('request');
 
+function sendMessageToUser(push_token, message) {
+  request({
+    url: 'https://fcm.googleapis.com/fcm/send',
+    method: 'POST',
+    headers: {
+      'Content-Type' :' application/json',
+      'Authorization': 'key=AAAA3dRXusc:APA91bFqoC0qnbp4-C4xnLB0CMP5yMzQOvxEEpY39SZKhzAmf46FIja-_YvlkXJoHdEs0gO3Se8fDAQ_5xFE6Lj0f_I9EAYSxtCvjIrFd1fbOAEnRsY6Dv6A0ZoFU0wmAayktQhrzfny'
+    },
+    body: JSON.stringify(
+      { "data": {
+        "message": message
+      },
+        "to" : push_token
+      }
+    )
+  }, function(error, response, body) {
+    if (error) { 
+      console.error(error, response, body); 
+    }
+    else if (response.statusCode >= 400) { 
+      console.error('HTTP Error: '+response.statusCode+' - '+response.statusMessage+'\n'+body); 
+    }
+    else {
+      console.log('Done!')
+    }
+  });
+}
+
 io.on('connection', function(socket) {
     console.log('Server listening on port: 65080');
     var address = socket.handshake.address;
