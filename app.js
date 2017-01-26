@@ -55,10 +55,13 @@ io.on('connection', function(socket) {
 		if (push_tokens[i].user_id == tokenObj.user_id) {
 			durum = true;
 			push_tokens[i].push_token = tokenObj.push_token;
+			console.log('Push Token vardı, güncellendi');
 		}
 	}
 	if (durum == false) {
 		push_tokens.push(tokenObj);
+		console.log('Push Token yoktu, yeni eklendi');
+		console.log(tokenObj);
 	}
     });
 	
