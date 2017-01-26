@@ -4,6 +4,7 @@ console.log('Server acik');
 
 var cafe_sockets = new Array();
 var client_sockets = new Array();
+var push_tokens = new Array();
 
 var request = require('request');
 
@@ -42,6 +43,23 @@ io.on('connection', function(socket) {
 
     io.sockets.emit('this', {
         will: 'be received by everyone'
+    });
+	
+    socket.on('push_token', function(msg) {
+	var json_message = JSON.parse(msg);
+	var tokenObj = new Object();
+	tokenObj.user_id = json_message.user_id;
+	tokenObj.push_token = json_message.push_token;
+	var durum = false;
+	for (var i = 0; i < push_tokens.length; ++i) {
+		if (push_tokens[i].user_id == tokenObj.user_id) {
+			durum = true;
+			push_tokens[i].push_token = tokenObj.push_token;
+		}
+	}
+	if (durum == false) {
+		push_tokens.push(tokenObj);
+	}
     });
 	
     socket.on('cafe_oturum', function(msg) {
