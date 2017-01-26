@@ -19,7 +19,6 @@ function sendMessageToUser(push_token, message) {
     body: JSON.stringify(
       { "notification" : {
 	"body" : message
-      }
       },
         "to" : push_token
       }
