@@ -17,8 +17,9 @@ function sendMessageToUser(push_token, message) {
       'Authorization': 'key=AAAA3dRXusc:APA91bFqoC0qnbp4-C4xnLB0CMP5yMzQOvxEEpY39SZKhzAmf46FIja-_YvlkXJoHdEs0gO3Se8fDAQ_5xFE6Lj0f_I9EAYSxtCvjIrFd1fbOAEnRsY6Dv6A0ZoFU0wmAayktQhrzfny'
     },
     body: JSON.stringify(
-      { "data": {
-        "message": message
+      { "notification" : {
+	"body" : message
+      }
       },
         "to" : push_token
       }
