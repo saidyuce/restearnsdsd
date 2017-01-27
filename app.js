@@ -8,7 +8,7 @@ var push_tokens = new Array();
 
 var request = require('request');
 
-function sendMessageToUser(push_token, message) {
+function sendMessageToUser(push_token, message, userData) {
   request({
     url: 'https://fcm.googleapis.com/fcm/send',
     method: 'POST',
@@ -18,7 +18,10 @@ function sendMessageToUser(push_token, message) {
     },
     body: JSON.stringify(
       { "notification" : {
-	"body" : message
+	"body" : message,
+      },
+      { "data": {
+       	"message": userData
       },
         "to" : push_token
       }
@@ -114,12 +117,14 @@ io.on('connection', function(socket) {
 		    console.log('User id:');
 			console.log(client_sockets[i6].data.user_id);
                 if (client_sockets[i6].data.user_id == my_cl_obj.data.user_id) {
-			
-            //client_sockets[i6].con.emit(client_sockets[i6].data.user_id + "_siparis_geri_bildirim",my_cl_obj.data );
-			//console.log(client_sockets[i6].data.user_id+"");
+		
+			// socket emit
+            client_sockets[i6].con.emit(client_sockets[i6].data.user_id + "_siparis_geri_bildirim",my_cl_obj.data );
+			console.log(client_sockets[i6].data.user_id+"");
+			// push
 			for (var i99 = 0; i99 < push_tokens.length; ++i99) {
 				if (push_tokens[i99].user_id == client_sockets[i6].data.user_id) {
-					sendMessageToUser(push_tokens[i99].push_token + '', 'Deneme123')
+					sendMessageToUser(push_tokens[i99].push_token + '', 'Siparişiniz onaylandı', my_cl_obj.data + "")
 					console.log('send message to user döndü');
 				} else {
 					console.log('id eşleşmedi, mesaj yollanmadı');
@@ -138,9 +143,18 @@ else if (tip == "said1234oturum") {
 		    console.log('User id:');
 			console.log(client_sockets[i6].data.user_id);
                 if (client_sockets[i6].data.user_id == my_cl_obj.data.user_id) {
-			
+			// socket emit
             client_sockets[i6].con.emit(client_sockets[i6].data.user_id + "_oturum_geri_bildirim",my_cl_obj.data );
 			console.log(client_sockets[i6].data.user_id+"");
+			// push
+			for (var i99 = 0; i99 < push_tokens.length; ++i99) {
+				if (push_tokens[i99].user_id == client_sockets[i6].data.user_id) {
+					sendMessageToUser(push_tokens[i99].push_token + '', 'Oturumunuz kapatıldı', my_cl_obj.data + "")
+					console.log('send message to user döndü');
+				} else {
+					console.log('id eşleşmedi, mesaj yollanmadı');
+				}
+			}
                 }
             }
         }
