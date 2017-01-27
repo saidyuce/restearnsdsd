@@ -20,10 +20,10 @@ function sendMessageToUser(push_token, message, userData) {
       { "notification" : {
 	"body" : message,
       },
-      { "data": {
+      "data": {
        	"message": userData
       },
-        "to" : push_token
+      "to" : push_token
       }
     )
   }, function(error, response, body) {
