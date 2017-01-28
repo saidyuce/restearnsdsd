@@ -21,7 +21,7 @@ function sendMessageToUser(push_token, message, userData) {
 	"body" : message,
       },
       "data": {
-       	"message": userData
+       	"userData": userData,
       },
       "to" : push_token
       }
