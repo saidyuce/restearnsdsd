@@ -18,10 +18,10 @@ function sendMessageToUser(push_token, message, userData) {
     },
     body: JSON.stringify(
       { "notification" : {
-	"body" : message,
+	"body" : message
       },
       "data": {
-       	"userData": "Dataasdasd",
+       	"userData": userData
       },
       "to" : push_token
       }
@@ -124,7 +124,7 @@ io.on('connection', function(socket) {
 			// push
 			for (var i99 = 0; i99 < push_tokens.length; ++i99) {
 				if (push_tokens[i99].user_id == client_sockets[i6].data.user_id) {
-					sendMessageToUser(push_tokens[i99].push_token + '', 'Siparişiniz onaylandı', my_cl_obj.data + "")
+					sendMessageToUser(push_tokens[i99].push_token + '', 'Siparişiniz onaylandı', msg + "")
 					console.log('send message to user döndü');
 				} else {
 					console.log('id eşleşmedi, mesaj yollanmadı');
@@ -149,7 +149,7 @@ else if (tip == "said1234oturum") {
 			// push
 			for (var i99 = 0; i99 < push_tokens.length; ++i99) {
 				if (push_tokens[i99].user_id == client_sockets[i6].data.user_id) {
-					sendMessageToUser(push_tokens[i99].push_token + '', 'Oturumunuz kapatıldı', my_cl_obj.data + "")
+					sendMessageToUser(push_tokens[i99].push_token + '', 'Oturumunuz kapatıldı', msg + "")
 					console.log('send message to user döndü');
 				} else {
 					console.log('id eşleşmedi, mesaj yollanmadı');
