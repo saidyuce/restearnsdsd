@@ -176,8 +176,11 @@ else if (tip == "said1234oturum") {
 	                     for (var i6 = 0; i6 < cafe_sockets.length; ++i6) {
                     if (cafe_sockets[i6].cafe_id == cafe_id) {
                         for (var i7 = 0; i7 < cafe_sockets[i6].cafe_array.length; ++i7) {
-                            cafe_sockets[i6].cafe_array[i7].con
+				if(cafe_sockets[i6].cafe_array[i7].con!=socket){
+				    cafe_sockets[i6].cafe_array[i7].con
 				    .emit(cafe_sockets[i6].cafe_id + "_local_etki", msg);
+				}
+                        
                         }
                     }
                 }           
