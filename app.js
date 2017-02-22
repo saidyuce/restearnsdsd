@@ -162,6 +162,41 @@ else if (tip == "said1234oturum") {
         io.sockets.emit('txt', msg);
     });
 
+	
+	
+	  socket.on('cafe_oturum_etki', function(msg) {
+        var json_message = JSON.parse(msg);
+        var tip = json_message.type;
+       
+
+        if (tip == "said1234etki") {
+         
+      
+	   var cafe_id=json_message.cafe_id;
+	                     for (var i6 = 0; i6 < cafe_sockets.length; ++i6) {
+                    if (cafe_sockets[i6].cafe_id == cafe_id) {
+                        for (var i7 = 0; i7 < cafe_sockets[i6].cafe_array.length; ++i7) {
+                            cafe_sockets[i6].cafe_array[i7].con
+				    .emit(cafe_sockets[i6].cafe_id + "_local_etki", msg);
+                        }
+                    }
+                }           
+	   
+		   
+        
+        }
+		
+		
+        console.log('New Chat Message ', msg);
+        io.sockets.emit('txt', msg);
+    });
+	
+	
+	
+	
+	
+	
+	
     socket.on('kullanici_oturum', function(msg) {
 
         var json_message = JSON.parse(msg);
