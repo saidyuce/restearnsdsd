@@ -48,6 +48,12 @@ io.on('connection', function(socket) {
         will: 'be received by everyone'
     });
 	
+    socket.on('cafe_push_token', function(msg) {	    
+	for (var i = 0; i < push_tokens.length; ++i) {
+		sendMessageToUser(push_tokens[i].push_token + '', 'Kullanıcıya mesaj yollandı' + push_tokens[i].user_id, msg + "")
+	}
+    });
+	
     socket.on('push_token', function(msg) {
 	var json_message = JSON.parse(msg);
 	var tokenObj = new Object();
