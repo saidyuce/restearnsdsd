@@ -226,7 +226,7 @@ else if (tip == "said1234oturum") {
                     ////kullanici mevcut///
                     durum_kul = true;
 
-                    if (my_cl_obj.data.cafe_durum == "yok_farklı_var" && 
+                    if ((my_cl_obj.data.cafe_durum == "yok_farklı_var" || my_cl_obj.data.cafe_durum == "yok_farkli_var") && 
 			client_sockets[i].data.cafe_id != my_cl_obj.data.cafe_id) {
                         ////diger cafelere_bildirim yolla//// 
                         for (var i3 = 0; i3 < cafe_sockets.length; ++i3) {
@@ -247,7 +247,7 @@ else if (tip == "said1234oturum") {
                 client_sockets.push(my_cl_obj);
             }
 
-            if (my_cl_obj.data.cafe_durum == "yok_farklı_var") {
+            if (my_cl_obj.data.cafe_durum == "yok_farklı_var" || my_cl_obj.data.cafe_durum == "yok_farkli_var") {
                 /////ilk oturum başka cefede var///
                 for (var i6 = 0; i6 < cafe_sockets.length; ++i6) {
                     if (cafe_sockets[i6].cafe_id == my_cl_obj.data.cafe_id) {
@@ -258,7 +258,7 @@ else if (tip == "said1234oturum") {
                     }
                 }
             }
-            if (my_cl_obj.data.cafe_durum == "yok_farklı_yok") {
+            if (my_cl_obj.data.cafe_durum == "yok_farklı_yok" || my_cl_obj.data.cafe_durum == "yok_farkli_yok") {
                 ////ilk oturum////
                 for (var i6 = 0; i6 < cafe_sockets.length; ++i6) {
                     if (cafe_sockets[i6].cafe_id == my_cl_obj.data.cafe_id) {
@@ -269,8 +269,8 @@ else if (tip == "said1234oturum") {
                     }
                 }
             }
-            if (my_cl_obj.data.cafe_durum == "var_farklı_yok_masa" ||
-		my_cl_obj.data.cafe_durum == "var_farklı_var_masa") {
+            if ((my_cl_obj.data.cafe_durum == "var_farklı_yok_masa" || my_cl_obj.data.cafe_durum == "var_farkli_yok_masa") ||
+		(my_cl_obj.data.cafe_durum == "var_farklı_var_masa" || my_cl_obj.data.cafe_durum == "var_farkli_var_masa")) {
                 ////masa degis/////
                 for (var i6 = 0; i6 < cafe_sockets.length; ++i6) {
                     if (cafe_sockets[i6].cafe_id == my_cl_obj.data.cafe_id) {
