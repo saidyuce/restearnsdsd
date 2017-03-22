@@ -5,6 +5,9 @@ console.log('Server acik');
 var cafe_sockets = new Array();
 var client_sockets = new Array();
 var push_tokens = new Array();
+var cafeSiparisQR = new Array();
+var cafeOdulQR = new Array();
+var siparisBeklemede = new Array();
 
 var request = require('request');
 
@@ -46,6 +49,92 @@ io.on('connection', function(socket) {
 
     io.sockets.emit('this', {
         will: 'be received by everyone'
+    });
+	
+    socket.on('siparis_qr_yenile', function(msg) {
+	var json_message = JSON.parse(msg);
+	var qrObj = new Object();
+	qrObj.cafe_id = json_message.cafe_id;
+	qrObj.siparis_qr = json_message.siparis_qr;
+	var durum = false;
+	
+	for (var i = 0; i < cafeSiparisQR.length; ++i) {
+		if (cafeSiparisQR[i].cafe_id == qrObj.cafe_id) {
+			durum = true;
+			cafeSiparisQR[i].siparis_qr = qrObj.siparis_qr;
+			console.log('Siparis QR vardı, güncellendi');
+		}
+	}
+	    
+	if (durum == false) {
+		cafeSiparisQR.push(qrObj);
+		console.log('Siparis QR yoktu, yeni eklendi');
+		console.log(qrObj);
+	}
+    });
+	
+    socket.on('odul_qr_yenile', function(msg) {
+	var json_message = JSON.parse(msg);
+	var qrObj = new Object();
+	qrObj.cafe_id = json_message.cafe_id;
+	qrObj.odul_qr = json_message.odul_qr;
+	var durum = false;
+	
+	for (var i = 0; i < cafeOdulQR.length; ++i) {
+		if (cafeOdulQR[i].cafe_id == qrObj.cafe_id) {
+			durum = true;
+			cafeOdulQR[i].odul_qr = qrObj.odul_qr;
+			console.log('Odul QR vardı, güncellendi');
+		}
+	}
+	    
+	if (durum == false) {
+		cafeOdulQR.push(qrObj);
+		console.log('Odul QR yoktu, yeni eklendi');
+		console.log(qrObj);
+	}
+    });
+	
+    socket.on('siparis_qr_cikti', function(msg) {
+	var json_message = JSON.parse(msg);
+	var qrObj = new Object();
+	qrObj.cafe_id = json_message.cafe_id;
+	qrObj.siparis_qr = json_message.siparis_qr;
+	var durum = false;
+	
+	for (var i = 0; i < cafeSiparisQR.length; ++i) {
+		if (cafeSiparisQR[i].cafe_id == qrObj.cafe_id) {
+			durum = true;
+			siparisBeklemede.push(cafeSiparisQR[i]);
+			console.log('Siparis QR beklemeye alındı');
+			cafeSiparisQR[i].siparis_qr = qrObj.siparis_qr;
+			console.log('Siparis QR çıktı sonrası yenilendi');
+		}
+	}
+	    
+	if (durum == false) {
+		console.log('Mevcut Siparis QR yok, çıktı alınamadı');
+	}
+    });
+
+    socket.on('siparis_qr_okutuldu', function(msg) {
+	var json_message = JSON.parse(msg);
+	var qrObj = new Object();
+	qrObj.cafe_id = json_message.cafe_id;
+	qrObj.siparis_qr = json_message.siparis_qr;
+	var durum = false;
+	
+	for (var i = 0; i < siparisBeklemede.length; ++i) {
+		if (siparisBeklemede[i].cafe_id == qrObj.cafe_id && siparisBeklemede[i].siparis_qr == qrObj.siparis_qr) {
+			durum = true;
+			siparisBeklemede.splice(i, 1);
+			console.log('Siparis QR okutuldu ve Beklemeden kaldırıldı');
+		}
+	}
+	    
+	if (durum == false) {
+		console.log('Siparis QR Beklemedeki hiçbir QR ile eşleşmedi');
+	}
     });
 	
     socket.on('cafe_push_token', function(msg) {	    
@@ -196,7 +285,7 @@ else if (tip == "said1234oturum") {
         }
 		
 		
-        console.log('New Chat Message ', msg);
+        console.log('New Message ', msg);
         io.sockets.emit('txt', msg);
     });
 	
