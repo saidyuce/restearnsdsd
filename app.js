@@ -51,7 +51,8 @@ io.on('connection', function(socket) {
         will: 'be received by everyone'
     });
 	
-    socket.on('siparis_qr_yenile', function(msg) {
+	// free app kodu
+    /*socket.on('siparis_qr_yenile', function(msg) {
 	var json_message = JSON.parse(msg);
 	var qrObj = new Object();
 	qrObj.cafe_id = json_message.cafe_id;
@@ -135,13 +136,14 @@ io.on('connection', function(socket) {
 	if (durum == false) {
 		console.log('Siparis QR Beklemedeki hiçbir QR ile eşleşmedi');
 	}
-    });
+    });*/
 	
-    socket.on('cafe_push_token', function(msg) {	    
+	// kafe bildirim atma kodu distance göre filtrelencek sonradan
+    /*socket.on('cafe_push_token', function(msg) {	    
 	for (var i = 0; i < push_tokens.length; ++i) {
 		sendMessageToUser(push_tokens[i].push_token + '', 'Kullanıcıya mesaj yollandı' + push_tokens[i].user_id, msg + "")
 	}
-    });
+    });*/
 	
     socket.on('push_token', function(msg) {
 	var json_message = JSON.parse(msg);
