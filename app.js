@@ -108,7 +108,11 @@ io.on('connection', function(socket) {
                         cafe_sockets[i].cafe_array.push(my_cl_obj2);
                         console.log('eklendi');			    
                     }
-		    cafe_sockets[i].con.emit(cafe_sockets[i].cafe_id + "_mevcut_siparisler", orders);
+		    for (var i3 = 0; i3 < cafe_sockets[i].cafe_array.length; ++i3) {
+			    if (cafe_sockets[i].cafe_array[i3] == socket) {
+		    		cafe_sockets[i].cafe_array[i3].con.emit(cafe_sockets[i].cafe_id + "_mevcut_siparisler", orders);    
+			    }
+		    }
 
                 }
             }
