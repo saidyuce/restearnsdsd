@@ -102,13 +102,14 @@ io.on('connection', function(socket) {
                         if (cafe_sockets[i].cafe_array[i2].data.cafe_kul_id == my_cl_obj2.data.cafe_kul_id) {
                             durum2 = true;
                             cafe_sockets[i].cafe_array[i2] = my_cl_obj2;
-			    cafe_sockets[i].con.emit(cafe_sockets[i].cafe_id + "_mevcut_siparisler", orders);
                         }
                     }
                     if (durum2 == false) {			    
                         cafe_sockets[i].cafe_array.push(my_cl_obj2);
                         console.log('eklendi');			    
                     }
+		    cafe_sockets[i].con.emit(cafe_sockets[i].cafe_id + "_mevcut_siparisler", orders);
+
                 }
             }
             if (durum == false) {
