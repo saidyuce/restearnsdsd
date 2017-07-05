@@ -209,7 +209,8 @@ else if (tip == "said1234oturum") {
 	
     socket.on('kullanici_oturum', function(msg) {
 
-        var json_message = (typeof msg == "object" ? msg : JSON.parse(msg));
+	console.log(msg);
+        var json_message = JSON.parse(msg));
         var tip = json_message.type;
         console.log(tip);
         var durum_kul = false;
