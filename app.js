@@ -109,7 +109,7 @@ io.on('connection', function(socket) {
                         console.log('eklendi');			    
                     }
 		    for (var i3 = 0; i3 < cafe_sockets[i].cafe_array.length; ++i3) {
-			    if (cafe_sockets[i].cafe_array[i3] == socket) {
+			    if (cafe_sockets[i].cafe_array[i3].con == socket) {
 		    		cafe_sockets[i].cafe_array[i3].con.emit(cafe_sockets[i].cafe_id + "_mevcut_siparisler", orders);    
 			    }
 		    }
