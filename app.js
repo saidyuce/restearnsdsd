@@ -210,7 +210,7 @@ else if (tip == "said1234oturum") {
     socket.on('kullanici_oturum', function(msg) {
 
 	console.log(msg);
-        var json_message = JSON.parse(msg));
+        var json_message = JSON.parse(msg);
         var tip = json_message.type;
         console.log(tip);
         var durum_kul = false;
