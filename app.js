@@ -5,6 +5,7 @@ console.log('Server acik');
 var cafe_sockets = new Array();
 var client_sockets = new Array();
 var push_tokens = new Array();
+var orders = new Array();
 
 var request = require('request');
 
@@ -286,6 +287,8 @@ else if (tip == "said1234oturum") {
             var my_cl_obj = new Object();
             my_cl_obj.data = json_message;
             my_cl_obj.con = socket;
+	    orders.push(my_cl_obj.data.siparisler)
+	    console.log(orders)
 
             for (var i6 = 0; i6 < cafe_sockets.length; ++i6) {
                 if (cafe_sockets[i6].cafe_id == my_cl_obj.data.cafe_id) {
