@@ -5,7 +5,6 @@ console.log('Server acik');
 var cafe_sockets = new Array();
 var client_sockets = new Array();
 var push_tokens = new Array();
-var orders = new Array();
 
 var request = require('request');
 
@@ -108,19 +107,11 @@ io.on('connection', function(socket) {
                         cafe_sockets[i].cafe_array.push(my_cl_obj2);
                         console.log('eklendi');			    
                     }
-		    for (var i3 = 0; i3 < cafe_sockets[i].cafe_array.length; ++i3) {
-			    if (cafe_sockets[i].cafe_array[i3].con == socket) {
-		    		cafe_sockets[i].cafe_array[i3].con.emit(cafe_sockets[i].cafe_id + "_mevcut_siparisler", orders);    
-			    }
-		    }
-
                 }
             }
             if (durum == false) {
                 cafe_sockets.push(cafe_soket_obj);
-		my_cl_obj2.con.emit(cafe_sockets[i].cafe_id + "_mevcut_siparisler", orders);
                 console.log('eklendi_hic_yoktu');
-		
 	    }
         }else if (tip == "said1234siparis") {
 
@@ -218,8 +209,7 @@ else if (tip == "said1234oturum") {
 	
     socket.on('kullanici_oturum', function(msg) {
 
-	console.log(msg);
-        var json_message = JSON.parse(msg);
+        var json_message = (typeof msg == "object" ? msg : JSON.parse(msg));
         var tip = json_message.type;
         console.log(tip);
         var durum_kul = false;
@@ -295,14 +285,13 @@ else if (tip == "said1234oturum") {
             var my_cl_obj = new Object();
             my_cl_obj.data = json_message;
             my_cl_obj.con = socket;
-	    orders.push(my_cl_obj.data.siparisler)
-	    console.log(orders)
 
             for (var i6 = 0; i6 < cafe_sockets.length; ++i6) {
                 if (cafe_sockets[i6].cafe_id == my_cl_obj.data.cafe_id) {
                     for (var i7 = 0; i7 < cafe_sockets[i6].cafe_array.length; ++i7) {
                         cafe_sockets[i6].cafe_array[i7].con
-				.emit(cafe_sockets[i6].cafe_id + "_siparis_verildi", my_cl_obj.data.siparisler);
+				.emit(cafe_sockets[i6].cafe_id + "_siparis_verildi", my_cl_obj.data.user_id);
+			    console.log('Siparis geldi',
                     }
                 }
             }
