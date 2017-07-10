@@ -209,7 +209,7 @@ else if (tip == "said1234oturum") {
 	
     socket.on('kullanici_oturum', function(msg) {
 
-        var json_message = (typeof msg == "object" ? msg : JSON.parse(msg));
+        var json_message = JSON.parse(msg);
         var tip = json_message.type;
         console.log(tip);
         var durum_kul = false;
@@ -291,7 +291,6 @@ else if (tip == "said1234oturum") {
                     for (var i7 = 0; i7 < cafe_sockets[i6].cafe_array.length; ++i7) {
                         cafe_sockets[i6].cafe_array[i7].con
 				.emit(cafe_sockets[i6].cafe_id + "_siparis_verildi", my_cl_obj.data.user_id);
-			    console.log('Siparis geldi',
                     }
                 }
             }
