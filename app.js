@@ -5,6 +5,7 @@ console.log('Server acik');
 var cafe_sockets = new Array();
 var client_sockets = new Array();
 var push_tokens = new Array();
+var garson_push_tokens = new Array();
 
 var request = require('request');
 
@@ -56,6 +57,26 @@ io.on('connection', function(socket) {
     });*/
 	
     socket.on('push_token', function(msg) {
+	var json_message = JSON.parse(msg);
+	var tokenObj = new Object();
+	tokenObj.user_id = json_message.user_id;
+	tokenObj.push_token = json_message.push_token;
+	var durum = false;
+	for (var i = 0; i < push_tokens.length; ++i) {
+		if (push_tokens[i].user_id == tokenObj.user_id) {
+			durum = true;
+			push_tokens[i].push_token = tokenObj.push_token;
+			console.log('Push Token vardı, güncellendi');
+		}
+	}
+	if (durum == false) {
+		push_tokens.push(tokenObj);
+		console.log('Push Token yoktu, yeni eklendi');
+		console.log(tokenObj);
+	}
+    });
+	
+	socket.on('garson_push_token', function(msg) {
 	var json_message = JSON.parse(msg);
 	var tokenObj = new Object();
 	tokenObj.user_id = json_message.user_id;
@@ -288,10 +309,20 @@ else if (tip == "said1234oturum") {
 
             for (var i6 = 0; i6 < cafe_sockets.length; ++i6) {
                 if (cafe_sockets[i6].cafe_id == my_cl_obj.data.cafe_id) {
+			// socket emit
                     for (var i7 = 0; i7 < cafe_sockets[i6].cafe_array.length; ++i7) {
                         cafe_sockets[i6].cafe_array[i7].con
 				.emit(cafe_sockets[i6].cafe_id + "_siparis_verildi", my_cl_obj.data.user_id);
                     }
+			// push
+			for (var i99 = 0; i99 < garson_push_tokens.length; ++i99) {
+				if (garson_push_tokens[i99].user_id == my_cl_obj.data.user_id) {
+					sendMessageToUser(garson_push_tokens[i99].push_token + '', 'Yeni Sipariş', msg + "")
+					console.log('send message to garson döndü');
+				} else {
+					console.log('id eşleşmedi, mesaj yollanmadı');
+				}
+			}
                 }
             }
         }
