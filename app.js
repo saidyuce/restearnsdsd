@@ -9,6 +9,47 @@ var garson_push_tokens = new Array();
 
 var request = require('request');
 
+function sendEmailToUser(api_key, user_name, key, type) {
+	var subject = '';
+	var body = '';
+	if (type == 'register') {
+		subject = 'Restearn Kayıt';
+		body = 'http://restearnserver.tk/RestUpp/etkinlestir.php?id=' + key;
+	} else {
+		subject = 'Restearn Şifre Yenileme';
+		body = 'http://restearnserver.tk/RestUpp/sifremi_unuttum.php?id=' + key;
+	}
+	
+	var Sendgrid = require('sendgrid')(
+  		process.env.SENDGRID_API_KEY || api_key
+	);
+	
+	var request = Sendgrid.emptyRequest({
+ 	 	method: 'POST',
+ 		path: '/v3/mail/send',
+ 		body: {
+ 	  		 personalizations: [{
+   	  			 to: [{ email: user_name }],
+    	 			 subject: subject
+   			 }],
+   			 from: { email: 'support@restearn.com' },
+   	 		 content: [{
+    				 type: 'text/plain',
+    	 			 value: 'Merhaba Restearn Sincabı!\n\nİşleme devam etmek için lütfen aşağıdaki linke tıkla:\n\n' + body
+   			 }]
+  		}
+	});
+
+	Sendgrid.API(request, function (error, response) {
+ 		if (error) {
+ 	 		console.log('Mail not sent; see error message below.');
+ 	 	} else {
+ 	  		console.log('Mail sent successfully!');
+ 	 	}
+ 	 		console.log(response);
+	});
+}
+
 function sendMessageToUser(push_token, message, userData) {
   request({
     url: 'https://fcm.googleapis.com/fcm/send',
@@ -75,6 +116,13 @@ io.on('connection', function(socket) {
 		console.log(tokenObj);
 	}
     });
+	
+	socket.on('email_user', function(msg) {
+		var json_message = JSON.parse(msg);
+		
+		sendEmailToUser(json_message.api_key, json_message.user_name, json_message.key, json_message.type);
+	
+   	});
 	
 	socket.on('garson_push_token', function(msg) {
 	var json_message = JSON.parse(msg);
