@@ -14,10 +14,10 @@ function sendEmailToUser(api_key, user_name, key, type) {
 	var body = '';
 	if (type == 'register') {
 		subject = 'Restearn Kayıt';
-		body = 'http://restearnserver.tk/RestUpp/etkinlestir.php?id=' + key;
+		body = 'http://restearnserver.com/RestUpp/etkinlestir.php?id=' + key;
 	} else {
 		subject = 'Restearn Şifre Yenileme';
-		body = 'http://restearnserver.tk/RestUpp/sifremi_unuttum.php?id=' + key;
+		body = 'http://restearnserver.com/RestUpp/sifremi_unuttum.php?id=' + key;
 	}
 	
 	var Sendgrid = require('sendgrid')(
