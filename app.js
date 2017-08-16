@@ -13,7 +13,7 @@ function sendEmailToUser(api_key, user_name, key, type) {
 	var subject = '';
 	var body = '';
 	if (type == 'register') {
-		subject = 'Restearn Kayıt';
+		subject = 'Restearn E-mail Aktivasyon';
 		body = 'http://restearnserver.com/RestUpp/etkinlestir.php?id=' + key;
 	} else {
 		subject = 'Restearn Şifre Yenileme';
