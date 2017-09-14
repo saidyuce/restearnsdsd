@@ -10,7 +10,6 @@ var garson_push_tokens = new Array();
 var request = require('request');
 
 function sendEmailToUser(api_key, user_name, key, type) {
-	console.log('email func entered');
 	var subject = '';
 	var body = '';
 	if (type == 'register') {
