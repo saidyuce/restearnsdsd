@@ -1,15 +1,8 @@
-var io = require('socket.io').listen(65080);
+var app = require('express')();
+var socketio = require('socket.io');
+var adapter = require('socket.io-redis');
 
-console.log('Server acik');
-var request = require('request');
+var server = app.listen(process.env.NODE_PORT || 9000);
 
-io.on('connection', function(socket) {
-
-
-    console.log('Server listening on port: 65080');
-    var address = socket.handshake.address;
-    console.log('New connection from ' + address.address + ':' + address.port);
-
-  
-	
-});
+io = socketio(server);
+io.adapter(adapter());
